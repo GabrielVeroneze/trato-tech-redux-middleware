@@ -1,17 +1,9 @@
-import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit'
-import categoriasSlice, { buscarCategorias } from './reducers/categorias'
+import { configureStore } from '@reduxjs/toolkit'
+import { listener } from './middlewares/categorias'
+import categoriasSlice from './reducers/categorias'
 import itensSlice from './reducers/itens'
 import carrinhoSlice from './reducers/carrinho'
 import buscaSlice from './reducers/busca'
-
-const listener = createListenerMiddleware()
-
-listener.startListening({
-    actionCreator: buscarCategorias.pending,
-    effect: async (action) => {
-        console.log('buscando categorias: ', action)
-    },
-})
 
 const store = configureStore({
     reducer: {
