@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { buscarCategorias } from '@/store/reducers/categoria'
+import { buscarCategorias } from '@/store/reducers/categorias'
 import { buscarItens } from '@/store/reducers/itens'
 import { AppDispatch, RootState } from '@/store'
 import Header from '@/components/Header'
