@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { buscarCategorias } from '@/store/reducers/categorias'
+import { carregarCategorias } from '@/store/reducers/categorias'
 import { buscarItens } from '@/store/reducers/itens'
 import { AppDispatch, RootState } from '@/store'
 import Header from '@/components/Header'
@@ -16,7 +16,7 @@ const Home = () => {
     const categorias = useSelector((state: RootState) => state.categorias)
 
     useEffect(() => {
-        dispatch(buscarCategorias())
+        dispatch(carregarCategorias())
         dispatch(buscarItens())
     }, [dispatch])
 
