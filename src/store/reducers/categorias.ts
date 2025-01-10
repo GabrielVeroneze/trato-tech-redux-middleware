@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createStandaloneToast } from '@chakra-ui/toast'
 import { resetarCarrinho } from '@/store/reducers/carrinho'
 import { Categoria } from '@/types/Categoria'
@@ -7,6 +7,8 @@ import categoriasService from '@/services/categorias'
 const { toast } = createStandaloneToast()
 
 const initialState: Categoria[] = []
+
+export const carregarCategorias = createAction('categorias/carregarCategorias')
 
 export const buscarCategorias = createAsyncThunk(
     'categorias/buscar',
