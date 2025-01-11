@@ -9,6 +9,7 @@ const { toast } = createStandaloneToast()
 const initialState: Categoria[] = []
 
 export const carregarCategorias = createAction('categorias/carregarCategorias')
+export const carregarUmaCategoria = createAction('categorias/carregarUmaCategoria')
 
 export const buscarCategorias = createAsyncThunk(
     'categorias/buscar',
