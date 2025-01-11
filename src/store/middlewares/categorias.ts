@@ -1,6 +1,6 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { createStandaloneToast } from '@chakra-ui/toast'
-import { adicionarTodasAsCategorias, carregarCategorias } from '@/store/reducers/categorias'
+import { adicionarTodasAsCategorias, carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
 import categoriasService from '@/services/categorias'
 
 const { toast } = createStandaloneToast()
@@ -49,5 +49,12 @@ listener.startListening({
                 isClosable: true,
             })
         }
+    },
+})
+
+listener.startListening({
+    actionCreator: carregarUmaCategoria,
+    effect: async () => {
+        console.log('carregar apenas uma categoria')
     },
 })
