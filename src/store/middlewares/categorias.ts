@@ -1,11 +1,9 @@
-import { createListenerMiddleware } from '@reduxjs/toolkit'
+import { startAppListening } from '@/store/middlewares/listenerMiddleware'
 import { adicionarTodasAsCategorias, carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
 import categoriasService from '@/services/categorias'
 import criarTarefa from './utils/criarTarefa'
 
-export const listener = createListenerMiddleware()
-
-listener.startListening({
+startAppListening({
     actionCreator: carregarCategorias,
     effect: async (action, { dispatch, fork, unsubscribe }) => {
         await criarTarefa({
@@ -22,7 +20,7 @@ listener.startListening({
     },
 })
 
-listener.startListening({
+startAppListening({
     actionCreator: carregarUmaCategoria,
     effect: async () => {
         console.log('carregar apenas uma categoria')
