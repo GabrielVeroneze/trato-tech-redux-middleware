@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { listener } from './middlewares/categorias'
+import { listenerMiddleware } from './middlewares/listenerMiddleware'
 import categoriasSlice from './reducers/categorias'
 import itensSlice from './reducers/itens'
 import carrinhoSlice from './reducers/carrinho'
@@ -13,7 +13,7 @@ const store = configureStore({
         busca: buscaSlice,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().prepend(listener.middleware),
+        getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 })
 
 export default store
