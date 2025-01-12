@@ -1,7 +1,15 @@
-import { startAppListening } from '@/store/middlewares/listenerMiddleware'
+import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { adicionarTodasAsCategorias, carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
+import { RootState, AppDispatch } from '@/store'
 import categoriasService from '@/services/categorias'
 import criarTarefa from './utils/criarTarefa'
+
+export const listenerMiddleware = createListenerMiddleware()
+
+export const startAppListening = listenerMiddleware.startListening.withTypes<
+    RootState,
+    AppDispatch
+>()
 
 startAppListening({
     actionCreator: carregarCategorias,
