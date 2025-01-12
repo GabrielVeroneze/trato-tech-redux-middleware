@@ -1,16 +1,7 @@
 import { createStandaloneToast } from '@chakra-ui/toast'
+import { Tarefa } from '@/types/Tarefa'
 
 const { toast } = createStandaloneToast()
-
-interface criarTarefaProps {
-    fork: unknown
-    dispatch: unknown
-    action: unknown
-    busca: unknown
-    textoCarregando: string
-    textoSucesso: string
-    textoErro: string
-}
 
 const criarTarefa = async ({
     fork,
@@ -20,7 +11,7 @@ const criarTarefa = async ({
     textoCarregando,
     textoSucesso,
     textoErro,
-}: criarTarefaProps) => {
+}: Tarefa) => {
     toast({
         title: 'Carregando',
         description: textoCarregando,
