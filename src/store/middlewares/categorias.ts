@@ -1,5 +1,5 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
-import { adicionarTodasAsCategorias, carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
+import { adicionarTodasAsCategorias, adicionarUmaCategoria, carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
 import { RootState, AppDispatch } from '@/store'
 import categoriasService from '@/services/categorias'
 import criarTarefa from './utils/criarTarefa'
@@ -30,7 +30,17 @@ startAppListening({
 
 startAppListening({
     actionCreator: carregarUmaCategoria,
-    effect: async () => {
-        console.log('carregar apenas uma categoria')
+    effect: async (action, { dispatch, fork }) => {
+        const nomeCategoria = action.payload
+
+        await criarTarefa({
+            fork,
+            dispatch,
+            action: adicionarUmaCategoria,
+            busca: () => categoriasService.buscarUmaCategoria(nomeCategoria),
+            textoCarregando: `Carregando categoria ${nomeCategoria}`,
+            textoSucesso: `Categoria ${nomeCategoria} carregada com sucesso!`,
+            textoErro: `Erro na busca da categoria ${nomeCategoria}`,
+        })
     },
 })
