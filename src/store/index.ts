@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { listenerMiddleware } from './middlewares/listenerMiddleware'
+import { listenerMiddleware } from './middlewares/categorias'
 import categoriasSlice from './reducers/categorias'
 import itensSlice from './reducers/itens'
 import carrinhoSlice from './reducers/carrinho'
