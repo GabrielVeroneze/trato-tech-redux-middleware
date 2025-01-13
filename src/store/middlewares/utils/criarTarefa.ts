@@ -3,7 +3,7 @@ import { Tarefa } from '@/types/Tarefa'
 
 const { toast } = createStandaloneToast()
 
-const criarTarefa = async ({
+const criarTarefa = async <T>({
     fork,
     dispatch,
     action,
@@ -11,7 +11,7 @@ const criarTarefa = async ({
     textoCarregando,
     textoSucesso,
     textoErro,
-}: Tarefa) => {
+}: Tarefa<T>) => {
     toast({
         title: 'Carregando',
         description: textoCarregando,
