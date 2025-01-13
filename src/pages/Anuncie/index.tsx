@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
 import { cadastrarItem } from '@/store/reducers/itens'
 import { RootState } from '@/store'
 import { DadosCadastroProduto } from '@/types/DadosCadastroProduto'
@@ -31,6 +33,15 @@ const Anuncie = () => {
     const cadastrar = (data: DadosCadastroProduto) => {
         dispatch(cadastrarItem(data))
     }
+
+    useEffect(() => {
+        if (nomeCategoria) {
+            dispatch(carregarUmaCategoria(nomeCategoria))
+            return
+        }
+
+        dispatch(carregarCategorias())
+    }, [dispatch, nomeCategoria])
 
     return (
         <div className={styles.container}>
