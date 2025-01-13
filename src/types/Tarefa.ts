@@ -1,16 +1,12 @@
 import { ActionCreatorWithPayload, ForkedTask, ForkedTaskExecutor } from '@reduxjs/toolkit'
 import { AppDispatch } from '@/store'
-import { Categoria } from '@/types/Categoria'
 
-export interface Tarefa {
-    fork: <T>(executor: ForkedTaskExecutor<T>) => ForkedTask<T>
+export interface Tarefa<T> {
+    fork: <R>(executor: ForkedTaskExecutor<R>) => ForkedTask<R>
     dispatch: AppDispatch
-    action: ActionCreatorWithPayload<
-        unknown,
-        'categorias/adicionarTodasAsCategorias'
-    >
-    busca: () => Promise<Categoria[]>
+    action: ActionCreatorWithPayload<T, string>
     textoCarregando: string
+    busca: () => Promise<T>
     textoSucesso: string
     textoErro: string
 }
