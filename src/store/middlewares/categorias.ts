@@ -1,6 +1,7 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { adicionarTodasAsCategorias, adicionarUmaCategoria, carregarCategorias, carregarUmaCategoria } from '@/store/reducers/categorias'
 import { RootState, AppDispatch } from '@/store'
+import { Categoria } from '@/types/Categoria'
 import categoriasService from '@/services/categorias'
 import criarTarefa from './utils/criarTarefa'
 
@@ -14,7 +15,7 @@ export const startAppListening = listenerMiddleware.startListening.withTypes<
 startAppListening({
     actionCreator: carregarCategorias,
     effect: async (action, { dispatch, fork, unsubscribe }) => {
-        await criarTarefa({
+        await criarTarefa<Categoria[]>({
             fork,
             dispatch,
             action: adicionarTodasAsCategorias,
@@ -33,7 +34,7 @@ startAppListening({
     effect: async (action, { dispatch, fork }) => {
         const nomeCategoria = action.payload
 
-        await criarTarefa({
+        await criarTarefa<Categoria>({
             fork,
             dispatch,
             action: adicionarUmaCategoria,
