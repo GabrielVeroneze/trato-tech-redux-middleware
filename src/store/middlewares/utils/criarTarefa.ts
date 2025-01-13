@@ -49,6 +49,8 @@ const criarTarefa = async <T>({
             isClosable: true,
         })
     }
+
+    return resposta
 }
 
 export default criarTarefa
