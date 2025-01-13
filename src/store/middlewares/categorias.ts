@@ -15,7 +15,7 @@ export const startAppListening = listenerMiddleware.startListening.withTypes<
 startAppListening({
     actionCreator: carregarCategorias,
     effect: async (action, { dispatch, fork, unsubscribe }) => {
-        await criarTarefa<Categoria[]>({
+        const resposta = await criarTarefa<Categoria[]>({
             fork,
             dispatch,
             action: adicionarTodasAsCategorias,
@@ -25,14 +25,26 @@ startAppListening({
             textoErro: 'Erro na busca de categorias',
         })
 
-        unsubscribe()
+        if (resposta.status === 'ok') {
+            unsubscribe()
+        }
     },
 })
 
 startAppListening({
     actionCreator: carregarUmaCategoria,
-    effect: async (action, { dispatch, fork }) => {
+    effect: async (action, { dispatch, fork, getState, unsubscribe }) => {
+        const { categorias } = getState()
         const nomeCategoria = action.payload
+        const categoriaCarregada = categorias.some(categoria => categoria.id === nomeCategoria)
+
+        if (categoriaCarregada) {
+            return
+        }
+
+        if (categorias.length === 5) {
+            return unsubscribe()
+        }
 
         await criarTarefa<Categoria>({
             fork,
