@@ -23,15 +23,21 @@ const Categoria = () => {
     })
 
     useEffect(() => {
-        dispatch(carregarUmaCategoria(nomeCategoria))
+        if (nomeCategoria) {
+            dispatch(carregarUmaCategoria(nomeCategoria))
+        }
     }, [dispatch, nomeCategoria])
+
+    if (!categoria) {
+        return null
+    }
 
     return (
         <div>
             <Header
-                titulo={categoria!.nome}
-                descricao={categoria!.descricao}
-                imagem={categoria!.header}
+                titulo={categoria.nome}
+                descricao={categoria.descricao}
+                imagem={categoria.header}
             >
                 <Button onClick={() => navigate(`/anuncie/${nomeCategoria}`)}>
                     Quero anunciar
