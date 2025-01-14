@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 import { Produto } from '@/types/Produto'
 import itensService from '@/services/itens'
@@ -36,6 +36,9 @@ const itensSlice = createSlice({
 
             state.splice(index, 1)
         },
+        adicionarItens: (state, { payload }: PayloadAction<Produto[]>) => {
+            state.push(...payload)
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -52,6 +55,6 @@ const itensSlice = createSlice({
     },
 })
 
-export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem } = itensSlice.actions
+export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem, adicionarItens } = itensSlice.actions
 
 export default itensSlice.reducer
