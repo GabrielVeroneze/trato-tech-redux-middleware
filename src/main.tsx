@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { createStandaloneToast } from '@chakra-ui/toast'
@@ -9,10 +8,8 @@ import '@/sass/_global.scss'
 const { ToastContainer } = createStandaloneToast()
 
 createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <Provider store={store}>
-            <ToastContainer />
-            <AppRoutes />
-        </Provider>
-    </StrictMode>
+    <Provider store={store}>
+        <ToastContainer />
+        <AppRoutes />
+    </Provider>
 )
