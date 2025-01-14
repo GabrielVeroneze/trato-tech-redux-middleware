@@ -16,9 +16,20 @@ export const startAppListening = itensListener.startListening.withTypes<
 startAppListening({
     actionCreator: carregarUmaCategoria,
     effect: async (action, { dispatch, fork, unsubscribe, getState }) => {
+        const { itens } = getState()
         const nomeCategoria = action.payload
 
-        const resposta = await criarTarefa<Produto[]>({
+        const itensCarregados = itens.some(item => item.categoria === nomeCategoria)
+
+        if (itensCarregados) {
+            return
+        }
+
+        if (itens.length === 25) {
+            return unsubscribe()
+        }
+
+        await criarTarefa<Produto[]>({
             fork,
             dispatch,
             action: adicionarItens,
