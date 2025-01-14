@@ -5,9 +5,9 @@ import { Categoria } from '@/types/Categoria'
 import categoriasService from '@/services/categorias'
 import criarTarefa from './utils/criarTarefa'
 
-export const listenerMiddleware = createListenerMiddleware()
+export const categoriasListener = createListenerMiddleware()
 
-export const startAppListening = listenerMiddleware.startListening.withTypes<
+export const startAppListening = categoriasListener.startListening.withTypes<
     RootState,
     AppDispatch
 >()
